@@ -11,7 +11,7 @@ export default function Page() {
         <div className="mx-auto max-w-6xl h-14 px-5 flex items-center justify-between pt-2">
           <a href="#top" className="flex items-center gap-3">
             <Image
-              src="/vitalworks-logo.png"
+              src="/header-logo.png"
               alt="Vital Works"
               width={180}
               height={40}
@@ -52,8 +52,8 @@ export default function Page() {
           </h1>
 
           <p className="mt-4 text-white/90 text-sm sm:text-base drop-shadow max-w-2xl">
-            産業保健師・カウンセラー・トレーナーの専門チームが、
-            コンサル・研修・現場実装までワンストップで支援します。
+            <h1>産業保健師・カウンセラー・トレーナーの専門チームが、</h1>
+            <h2>コンサル・研修・現場実装までワンストップで支援します。</h2>
           </p>
         </div>
       </section>
