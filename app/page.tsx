@@ -1,27 +1,51 @@
-/* LP: ロゴ小さめ・サービスがすぐ見える・HeroにHeaderを重ねた完全版 */
+"use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function Page() {
+  const [logoSrc, setLogoSrc] = useState("/header-logo.png"); // ← 初期は白ロゴ
+  const [headerClass, setHeaderClass] = useState(
+    "bg-white/10 backdrop-blur-sm text-white"
+  );
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 80) {
+        setHeaderClass("bg-white shadow-sm text-slate-800");
+        setLogoSrc("/header-logo-dark.png"); // 黒ロゴ
+      } else {
+        setHeaderClass("bg-white/10 backdrop-blur-sm text-white");
+        setLogoSrc("/header-logo.png"); // 白ロゴ
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <main className="min-h-dvh text-slate-800">
 
-      {/* ===== Header（Hero 画像の上に重ねる） ===== */}
-      <header className="absolute top-0 left-0 w-full z-50 bg-white/10 backdrop-blur-sm">
+      {/* ===== Header ===== */}
+      <header
+        id="site-header"
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${headerClass}`}
+      >
         <div className="mx-auto max-w-6xl h-14 px-5 flex items-center justify-between pt-2">
           <a href="#top" className="flex items-center gap-3">
             <Image
-              src="/header-logo.png"
+              id="header-logo"
+              src={logoSrc}
               alt="Vital Works"
               width={180}
               height={40}
-              className="object-contain"
+              className="object-contain transition-opacity duration-300"
               priority
             />
-
           </a>
 
-          <nav className="hidden sm:flex gap-6 text-sm text-white">
+          <nav className="hidden sm:flex gap-6 text-sm transition-colors duration-300">
             <a href="#services" className="hover:opacity-70">サービス</a>
             <a href="#benefits" className="hover:opacity-70">メリット</a>
             <a href="#contact" className="hover:opacity-70">お問い合わせ</a>
@@ -29,31 +53,28 @@ export default function Page() {
         </div>
       </header>
 
-      {/* ===== Hero（背景画像 + テキスト） ===== */}
-      <section id="top" className="relative h-[80vh] flex items-center">
+      {/* ===== Hero ===== */}
+      <section id="top" className="relative h-[140vh] flex items-center">
 
-        {/* 背景画像（あなたの hero 写真を /public/hero.jpg に保存） */}
         <Image
-          src="/hero.png"
+          src="/hero-usv3.png"
           alt="Hero Background"
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-right-top"
         />
 
-        {/* 文字を読みやすくする半透明レイヤー */}
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-black/10" />
 
-        {/* Hero テキスト */}
-        <div className="relative z-10 mx-auto max-w-6xl px-5 mt-[-40px]">
+        <div className="relative z-10 mx-auto max-w-6xl px-5 mt-[-40px] pt-20">
           <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow">
             身体は最も重要な資源<br className="hidden sm:block" />
-            組織に健康の<span className="text-red-700">火を灯す</span>
+            組織に健康の<span className="text-red-600">火を灯す</span>
           </h1>
 
           <p className="mt-4 text-white/90 text-sm sm:text-base drop-shadow max-w-2xl">
-            <h1>産業保健師・カウンセラー・トレーナーの専門チームが、</h1>
-            <h2>コンサル・研修・現場実装までワンストップで支援します。</h2>
+            産業保健師・カウンセラー・トレーナーの専門チームが、
+            コンサル・研修・現場実装までワンストップで支援します。
           </p>
         </div>
       </section>
@@ -103,18 +124,9 @@ export default function Page() {
           <h2 className="text-xl sm:text-2xl font-bold">導入メリット</h2>
 
           <ul className="mt-6 grid sm:grid-cols-3 gap-4">
-            <Benefit
-              title="パフォーマンス回復"
-              desc="プレゼンティーズム／アブセンティーズムの低減"
-            />
-            <Benefit
-              title="生産性の向上"
-              desc="個人×組織を同時に整える“ELEVATE”アプローチ"
-            />
-            <Benefit
-              title="健康文化の定着"
-              desc="仕組み化して持続する健康風土を共創"
-            />
+            <Benefit title="パフォーマンス回復" desc="プレゼンティーズム／アブセンティーズムの低減" />
+            <Benefit title="生産性の向上" desc="個人×組織を同時に整える“ELEVATE”アプローチ" />
+            <Benefit title="健康文化の定着" desc="仕組み化して持続する健康風土を共創" />
           </ul>
         </div>
       </section>
@@ -129,28 +141,15 @@ export default function Page() {
             オンライン面談で現状整理と進め方をご提案します。下記フォームよりご連絡ください。
           </p>
 
-          <div className="mt-6 rounded-lg border bg-white p-4">
-            <p className="text-xs text-slate-500 mb-3">
-              ※ 本番は Google フォームの「埋め込み HTML（iframe）」に差し替えてください。
-            </p>
-
-            <form className="grid gap-3 sm:max-w-lg">
-              <input className="border rounded-md px-3 py-2" placeholder="お名前" />
-              <input className="border rounded-md px-3 py-2" placeholder="会社名（任意）" />
-              <input className="border rounded-md px-3 py-2" placeholder="メールアドレス" />
-              <textarea className="border rounded-md px-3 py-2 min-h-28" placeholder="ご相談内容" />
-              <button
-                type="button"
-                className="inline-flex justify-center rounded-md px-5 py-3 bg-emerald-600 text-white font-medium hover:bg-emerald-700"
-              >
-                送信
-              </button>
-            </form>
+          <div className="mt-6 rounded-xl bg-white border border-slate-200 shadow-md p-1 sm:p-3">
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLSeP20Jc8VzrRTXKgMxN14gtnkLj_ZU-J5IT1TuG-eYoP9ub6Q/viewform?embedded=true"
+              width="100%"
+              height="1000"
+              className="rounded-lg"
+            />
           </div>
 
-          <div className="mt-6 text-sm text-slate-500">
-            直接のご連絡：info@vitalworks.jp
-          </div>
         </div>
       </section>
 
@@ -158,19 +157,23 @@ export default function Page() {
       <footer className="border-t">
         <div className="mx-auto max-w-6xl px-5 py-10 text-sm text-slate-500">
 
-          <div className="flex items-center gap-2">
-            <Image
-              src="/vital-works-logo.png"
-              alt=""
-              width={72}
-              height={20}
-              className="h-4 w-auto opacity-70"
-            />
-            <span className="font-medium text-slate-700">Vital Works</span>
-          </div>
+          
+    {/* 
+    <div className="flex items-center gap-2">
+      <Image
+        src="/header-logo-dark.png"
+        alt=""
+        width={200}
+        height={100}
+        className="h-4 w-auto opacity-70"
+      />
+      <span className="font-medium text-slate-700">Vital Works</span>
+    </div>
 
-          <div className="mt-2">所在地：東京都◯◯区</div>
-          <div className="mt-1">メール：info@vitalworks.jp</div>
+    <div className="mt-2">所在地：東京都◯◯区</div>
+    <div className="mt-1">メール：info@vitalworks.jp</div>
+    */}
+
           <a href="#" className="mt-2 inline-block hover:text-emerald-600">
             プライバシーポリシー
           </a>
@@ -186,11 +189,9 @@ export default function Page() {
   );
 }
 
-
 /* ===== Components ===== */
-function ServiceCard({
-  icon, title, bullets,
-}: { icon: React.ReactNode; title: string; bullets: string[] }) {
+
+function ServiceCard({ icon, title, bullets }: { icon: React.ReactNode; title: string; bullets: string[] }) {
   return (
     <div className="p-5 bg-white rounded-lg border shadow-sm hover:shadow-md transition-shadow">
       <div className="h-10 w-10 rounded-md border flex items-center justify-center mb-3 text-emerald-700">
@@ -223,7 +224,7 @@ function Benefit({ title, desc }: { title: string; desc: string }) {
   );
 }
 
-/* ==== Simple inline SVG icons ==== */
+/* ===== SVG Icons ===== */
 function SVGConsult() {
   return (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
