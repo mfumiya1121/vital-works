@@ -223,7 +223,7 @@ export default function Page() {
     try {
       const GAS_URL = "https://script.google.com/macros/s/AKfycbw0GaWwiW2TEj8juiyrXY2qzbSTHJL59nJC5zfYK5e_-TwPKsVqyE_ZGW4_d1cHCfT4/exec"; // ←あなたのURL
 
-      const res = await fetch(GAS_URL, {
+      /*const res = await fetch(GAS_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -232,7 +232,24 @@ export default function Page() {
           email,
           message,
         }),
-      });
+      });*/
+
+
+// ★ 新 fetch（デバッグ用）ここから ★
+const res = await fetch(GAS_URL, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name,
+    company,
+    email,
+    message,
+  }),
+});
+
+const text = await res.text();
+alert("レスポンス内容: " + text + "\nHTTPステータス: " + res.status);
+// ★ 新 fetch（デバッグ用）ここまで ★
 
       if (!res.ok) throw new Error("送信に失敗しました");
 
