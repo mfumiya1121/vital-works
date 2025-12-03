@@ -206,29 +206,45 @@ export default function Page() {
           </p>
 
           <form
-            className="mt-6 grid gap-3 sm:max-w-lg bg-white p-4 border rounded-lg"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              const form = new FormData(e.currentTarget);
+  className="grid gap-3 sm:max-w-lg"
+  onSubmit={async (e) => {
+    e.preventDefault();
 
-              const GAS_URL =
-                "https://script.google.com/macros/s/AKfycbzNiAYT4VNSIXNUvcOy0J3dVOKAmwhfQHxj27Bsl1NCTfSr4RFNbaAzClTLOFAnH90b/exec";
+    const form = new FormData(e.currentTarget);
 
-              await fetch(GAS_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  name: form.get("name"),
-                  company: form.get("company"),
-                  email: form.get("email"),
-                  message: form.get("message"),
-                }),
-              });
+    const name = form.get("name");
+    const company = form.get("company");
+    const email = form.get("email");
+    const message = form.get("message");
 
-              alert("送信しました。内容を受け付けました！");
-              e.currentTarget.reset();
-            }}
-          >
+    // 送信中 UI
+    alert("送信中です…少々お待ちください。");
+
+    try {
+      const GAS_URL = "https://script.google.com/macros/s/AKfycbzNiAYT4VNSIXNUvcOy0J3dVOKAmwhfQHxj27Bsl1NCTfSr4RFNbaAzClTLOFAnH90b/exec"; // ←あなたのURL
+
+      const res = await fetch(GAS_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          company,
+          email,
+          message,
+        }),
+      });
+
+      if (!res.ok) throw new Error("送信に失敗しました");
+
+      // ★ 成功ポップアップ
+      alert("送信が完了しました！\n担当者よりご連絡いたします。");
+
+      e.currentTarget.reset();
+    } catch (err) {
+      alert("送信に失敗しました。\nお手数ですが、再度お試しください。");
+    }
+  }}
+>
             <input name="name" className="border rounded-md px-3 py-2" placeholder="お名前" required />
             <input name="company" className="border rounded-md px-3 py-2" placeholder="会社名（任意）" />
             <input name="email" className="border rounded-md px-3 py-2" placeholder="メールアドレス" type="email" required />
