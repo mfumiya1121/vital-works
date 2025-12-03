@@ -66,17 +66,35 @@ export default function Page() {
 
         <div className="absolute inset-0 bg-black/10" />
 
-        <div className="relative z-10 mx-auto max-w-6xl px-5 mt-[-40px] pt-20">
-          <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow">
-            身体は最も重要な資源<br className="hidden sm:block" />
-            組織に健康の<span className="text-red-600">火を灯す</span>
-          </h1>
+   <div
+  className="
+    absolute 
+    z-10
+    left-1/2 
+    top-[32vh]
+    -translate-x-1/2
+    text-center
+    px-5
+    w-full
+    max-w-4xl
+  "
+>
 
-          <p className="mt-4 text-white/90 text-sm sm:text-base drop-shadow max-w-2xl">
-            産業保健師・カウンセラー・トレーナーの専門チームが、<br />
-            コンサル・研修・現場実装までワンストップで支援します。
-          </p>
-        </div>
+  <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow">
+    身体は最も重要な資源
+  </h1>
+
+  <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow mt-3">
+    組織に健康の<span className="text-red-600">火を灯す</span>
+  </h1>
+
+  {/* ←ここを中央揃え＆max-w 同じく揃える */}
+  <p className="mt-6 text-white/90 text-sm sm:text-base drop-shadow mx-auto max-w-3xl text-center">
+    産業保健師・カウンセラー・トレーナーの専門チームが<br />
+    コンサル・研修・現場実装までワンストップで支援します。
+  </p>
+
+</div>
       </section>
 
       {/* ===== Services ===== */}
@@ -125,7 +143,7 @@ export default function Page() {
 
           <ul className="mt-6 grid sm:grid-cols-3 gap-4">
             <Benefit title="パフォーマンス回復" desc="プレゼンティーズム／アブセンティーズムの低減" />
-            <Benefit title="生産性の向上" desc="個人×組織を同時に整える“ELEVATE”アプローチ" />
+            <Benefit title="生産性の向上" desc="個人×組織を同時に整えるアプローチ" />
             <Benefit title="健康文化の定着" desc="仕組み化して持続する健康風土を共創" />
           </ul>
         </div>
@@ -137,9 +155,9 @@ export default function Page() {
 
           <h2 className="text-xl sm:text-2xl font-bold">お問い合わせ</h2>
 
-          <p className="mt-3 text-slate-600">
+         {/* <p className="mt-3 text-slate-600">
             オンライン面談で現状整理と進め方をご提案します。下記フォームよりご連絡ください。
-          </p>
+          </p>*/}
 
           <div className="mt-6 rounded-xl bg-white border border-slate-200 shadow-md p-1 sm:p-3">
             <iframe
