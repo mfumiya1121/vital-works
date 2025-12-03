@@ -73,7 +73,7 @@ export default function Page() {
           </h1>
 
           <p className="mt-4 text-white/90 text-sm sm:text-base drop-shadow max-w-2xl">
-            産業保健師・カウンセラー・トレーナーの専門チームが、
+            産業保健師・カウンセラー・トレーナーの専門チームが、<br />
             コンサル・研修・現場実装までワンストップで支援します。
           </p>
         </div>
