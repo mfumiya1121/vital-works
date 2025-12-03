@@ -54,54 +54,41 @@ export default function Page() {
         </div>
       </header>
 
-{/* ===== Hero ===== */}
-<section id="top" className="relative h-[140vh] flex items-center">
+      {/* ===== Hero ===== */}
+      <section id="top" className="relative h-[140vh] flex items-center">
+        <Image
+          src="/hero-usv3.png"
+          alt="Hero Background"
+          fill
+          priority
+          className="object-cover object-right-top"
+        />
+        <div className="absolute inset-0 bg-black/10" />
 
-  {/* 背景画像 */}
-  <Image
-    src="/hero-usv3.png"
-    alt="Hero Background"
-    fill
-    priority
-    className="object-cover object-right-top"
-  />
+        <div
+          className="
+            relative z-10 
+            mx-auto max-w-6xl 
+            px-5 mt-[-40px] 
+            text-left
+            sm:ml-[calc(50%-460px)]
+          "
+        >
+          <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow">
+            健康は、組織の成長エンジン
+          </h1>
+          <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow">
+            人の健康が強くなると、成果は加速する
+          </h1>
+          <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow mt-3">
+            人の力を、経営の力へ
+          </h1>
 
-  {/* 半透明レイヤー */}
-  <div className="absolute inset-0 bg-black/10" />
-
-  {/* ===== Hero テキスト（※ここが完全修正版） ===== */}
-  <div
-    className="
-      relative z-10 
-      mx-auto max-w-6xl 
-      px-5 mt-[-40px] 
-      text-left
-      sm:ml-[calc(50%-460px)]
-    "
-  >
-
-    {/* 1行目 */}
-    <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow">
-      健康は、組織の成長エンジン
-    </h1>
-
-    {/* 2行目 */}
-    <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow">
-      人の健康が強くなると、成果は加速する
-    </h1>
-
-    {/* 3行目 */}
-    <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow mt-3">
-      人の力を、経営の力へ
-    </h1>
-
-    {/* サブコピー（心理士版・左寄せ） */}
-    <p className="mt-6 text-white/90 text-sm sm:text-base drop-shadow max-w-none">
-      産業保健師・心理士・トレーナーの専門チームが健康戦略の設計から現場実装まで伴走します
-    </p>
-
-  </div>
-</section>
+          <p className="mt-6 text-white/90 text-sm sm:text-base drop-shadow max-w-none">
+            産業保健師・心理士・トレーナーの専門チームが健康戦略の設計から現場実装まで伴走します
+          </p>
+        </div>
+      </section>
 
       {/* ===== Team ===== */}
       <section id="team" className="border-t bg-white">
@@ -137,12 +124,11 @@ export default function Page() {
               name="Hirohisa Kato"
               role="トレーナー"
               tagline="フィジカル面からパフォーマンスを引き上げるトレーナー。"
-              tags={["運動指導", "コンディショニング", "健康経営", "健康戦略", "データ利活用" ]}
+              tags={["運動指導", "コンディショニング", "健康経営", "健康戦略", "データ利活用"]}
             />
           </div>
         </div>
       </section>
-
 
       {/* ===== Services ===== */}
       <section id="services" className="bg-slate-50 border-t">
@@ -196,72 +182,67 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ===== Contact（フォーム修正済み） ===== */}
+      {/* ===== Contact（完全修正版） ===== */}
       <section id="contact" className="border-t bg-slate-50">
         <div className="mx-auto max-w-6xl px-5 py-12">
 
           <h2 className="text-xl sm:text-2xl font-bold">お問い合わせ</h2>
-          <p className="mt-3 text-slate-600">
-            下記フォームよりご連絡ください。
-          </p>
+          <p className="mt-3 text-slate-600">下記フォームよりご連絡ください。</p>
 
           <form
-  className="grid gap-3 sm:max-w-lg"
-  onSubmit={async (e) => {
-    e.preventDefault();
+            className="grid gap-3 sm:max-w-lg"
+            onSubmit={async (e) => {
+              e.preventDefault();
 
-    const form = new FormData(e.currentTarget);
+              const form = new FormData(e.currentTarget);
 
-    const name = form.get("name");
-    const company = form.get("company");
-    const email = form.get("email");
-    const message = form.get("message");
+              const name = form.get("name");
+              const company = form.get("company");
+              const email = form.get("email");
+              const message = form.get("message");
 
-    // 送信中 UI
-    alert("送信中です…少々お待ちください。");
+              alert("送信中です…少々お待ちください。");
 
-    try {
-      const GAS_URL = "https://script.google.com/macros/s/AKfycbw0GaWwiW2TEj8juiyrXY2qzbSTHJL59nJC5zfYK5e_-TwPKsVqyE_ZGW4_d1cHCfT4/exec"; // ←あなたのURL
+              try {
+                const GAS_URL =
+                  "https://script.google.com/macros/s/AKfycbxM8uK2FX6oGFCDEbDOX-qu7sRYD_Oa7bMU_BHiQcg0FYHM67WW2CwU8Ngzae4ZWnAG/exec";
 
-      /*const res = await fetch(GAS_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          company,
-          email,
-          message,
-        }),
-      });*/
+                console.log("===== フォーム送信開始 =====");
+                console.log("name:", name);
+                console.log("company:", company);
+                console.log("email:", email);
+                console.log("message:", message);
 
+                const res = await fetch(GAS_URL, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    name,
+                    company,
+                    email,
+                    message,
+                  }),
+                });
 
-// ★ 新 fetch（デバッグ用）ここから ★
-const res = await fetch(GAS_URL, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    name,
-    company,
-    email,
-    message,
-  }),
-});
+                const text = await res.text();
+                alert(
+                  "*** デバッグ情報 ***\n" +
+                    "HTTPステータス: " +
+                    res.status +
+                    "\n" +
+                    "レスポンス内容: " +
+                    text
+                );
 
-const text = await res.text();
-alert("レスポンス内容: " + text + "\nHTTPステータス: " + res.status);
-// ★ 新 fetch（デバッグ用）ここまで ★
+                if (!res.ok) throw new Error("送信に失敗しました");
 
-      if (!res.ok) throw new Error("送信に失敗しました");
-
-      // ★ 成功ポップアップ
-      alert("送信が完了しました！\n担当者よりご連絡いたします。");
-
-      e.currentTarget.reset();
-    } catch (err) {
-      alert("送信に失敗しました。\nお手数ですが、再度お試しください。");
-    }
-  }}
->
+                alert("送信が完了しました！\n担当者よりご連絡いたします。");
+                e.currentTarget.reset();
+              } catch (err) {
+                alert("エラー内容: " + JSON.stringify(err));
+              }
+            }}
+          >
             <input name="name" className="border rounded-md px-3 py-2" placeholder="お名前" required />
             <input name="company" className="border rounded-md px-3 py-2" placeholder="会社名（任意）" />
             <input name="email" className="border rounded-md px-3 py-2" placeholder="メールアドレス" type="email" required />
@@ -280,17 +261,12 @@ alert("レスポンス内容: " + text + "\nHTTPステータス: " + res.status)
       {/* ===== Footer ===== */}
       <footer className="border-t">
         <div className="mx-auto max-w-6xl px-5 py-10 text-sm text-slate-500">
-
           <a href="#" className="inline-block hover:text-emerald-600">
             プライバシーポリシー
           </a>
-
-          <div className="mt-6">
-            © {new Date().getFullYear()} Vital Works
-          </div>
+          <div className="mt-6">© {new Date().getFullYear()} Vital Works</div>
         </div>
       </footer>
-
     </main>
   );
 }
@@ -314,15 +290,10 @@ function MemberCard({
   return (
     <article className="rounded-xl border bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
       <div className="relative w-full aspect-[4/5] bg-slate-100">
-        <Image
-          src={imgSrc}
-          alt={imgAlt}
-          fill
-          className="object-cover"
-        />
+        <Image src={imgSrc} alt={imgAlt} fill className="object-cover" />
       </div>
 
-      <div className="p-4 flex flex-col flex-1">
+      <div className="p-4 flex flex-row flex-col">
         <h3 className="text-base sm:text-lg font-semibold">{name}</h3>
         <p className="mt-1 text-sm text-emerald-700 font-medium">{role}</p>
         <p className="mt-2 text-sm text-slate-700 leading-relaxed">{tagline}</p>
@@ -342,9 +313,17 @@ function MemberCard({
   );
 }
 
-/* ===== Others ===== */
+/* ===== その他コンポーネント ===== */
 
-function ServiceCard({ icon, title, bullets }: { icon: React.ReactNode; title: string; bullets: string[] }) {
+function ServiceCard({
+  icon,
+  title,
+  bullets,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  bullets: string[];
+}) {
   return (
     <div className="p-5 bg-white rounded-lg border shadow-sm hover:shadow-md transition-shadow">
       <div className="h-10 w-10 rounded-md border flex items-center justify-center mb-3 text-emerald-700">
@@ -375,7 +354,8 @@ function Benefit({ title, desc }: { title: string; desc: string }) {
   );
 }
 
-/* Icons */
+/* ===== Icons ===== */
+
 function SVGConsult() {
   return (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
