@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function Page() {
-  const [logoSrc, setLogoSrc] = useState("/header-logo.png"); // ← 初期は白ロゴ
+  const [logoSrc, setLogoSrc] = useState("/header-logo.png");
   const [headerClass, setHeaderClass] = useState(
     "bg-white/10 backdrop-blur-sm text-white"
   );
@@ -13,10 +13,10 @@ export default function Page() {
     const onScroll = () => {
       if (window.scrollY > 80) {
         setHeaderClass("bg-white shadow-sm text-slate-800");
-        setLogoSrc("/header-logo-dark.png"); // 黒ロゴ
+        setLogoSrc("/header-logo-dark.png");
       } else {
         setHeaderClass("bg-white/10 backdrop-blur-sm text-white");
-        setLogoSrc("/header-logo.png"); // 白ロゴ
+        setLogoSrc("/header-logo.png");
       }
     };
 
@@ -46,6 +46,7 @@ export default function Page() {
           </a>
 
           <nav className="hidden sm:flex gap-6 text-sm transition-colors duration-300">
+            <a href="#team" className="hover:opacity-70">メンバー</a>
             <a href="#services" className="hover:opacity-70">サービス</a>
             <a href="#benefits" className="hover:opacity-70">メリット</a>
             <a href="#contact" className="hover:opacity-70">お問い合わせ</a>
@@ -53,49 +54,95 @@ export default function Page() {
         </div>
       </header>
 
-      {/* ===== Hero ===== */}
-      <section id="top" className="relative h-[140vh] flex items-center">
+{/* ===== Hero ===== */}
+<section id="top" className="relative h-[140vh] flex items-center">
 
-        <Image
-          src="/hero-usv3.png"
-          alt="Hero Background"
-          fill
-          priority
-          className="object-cover object-right-top"
-        />
+  {/* 背景画像 */}
+  <Image
+    src="/hero-usv3.png"
+    alt="Hero Background"
+    fill
+    priority
+    className="object-cover object-right-top"
+  />
 
-        <div className="absolute inset-0 bg-black/10" />
+  {/* 半透明レイヤー */}
+  <div className="absolute inset-0 bg-black/10" />
 
-   <div
-  className="
-    absolute 
-    z-10
-    left-1/2 
-    top-[32vh]
-    -translate-x-1/2
-    text-center
-    px-5
-    w-full
-    max-w-4xl
-  "
->
+  {/* ===== Hero テキスト（※ここが完全修正版） ===== */}
+  <div
+    className="
+      relative z-10 
+      mx-auto max-w-6xl 
+      px-5 mt-[-40px] 
+      text-left
+      sm:ml-[calc(50%-460px)]
+    "
+  >
 
-  <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow">
-    身体は最も重要な資源
-  </h1>
+    {/* 1行目 */}
+    <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow">
+      健康は、組織の成長エンジン
+    </h1>
 
-  <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow mt-3">
-    組織に健康の<span className="text-red-600">火を灯す</span>
-  </h1>
+    {/* 2行目 */}
+    <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow">
+      人の健康が強くなると、成果は加速する
+    </h1>
 
-  {/* ←ここを中央揃え＆max-w 同じく揃える */}
-  <p className="mt-6 text-white/90 text-sm sm:text-base drop-shadow mx-auto max-w-3xl text-center">
-    産業保健師・カウンセラー・トレーナーの専門チームが<br />
-    コンサル・研修・現場実装までワンストップで支援します。
-  </p>
+    {/* 3行目 */}
+    <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow mt-3">
+      人の力を、経営の力へ
+    </h1>
 
-</div>
+    {/* サブコピー（心理士版・左寄せ） */}
+    <p className="mt-6 text-white/90 text-sm sm:text-base drop-shadow max-w-none">
+      産業保健師・心理士・トレーナーの専門チームが健康戦略の設計から現場実装まで伴走します
+    </p>
+
+  </div>
+</section>
+
+      {/* ===== Team ===== */}
+      <section id="team" className="border-t bg-white">
+        <div className="mx-auto max-w-6xl px-5 py-12">
+          <h2 className="text-xl sm:text-2xl font-bold">Team ─ メンバー紹介</h2>
+          <p className="mt-3 text-slate-600 text-sm sm:text-base max-w-2xl">
+            現場で培った経験を持つ3名の専門家が、組織の健康課題に伴走します。
+            それぞれの得意分野を掛け合わせ、設計から実装まで一気通貫でサポートします。
+          </p>
+
+          <div className="mt-8 grid gap-6 sm:grid-cols-3">
+            <MemberCard
+              imgSrc="/member-fumiya.png"
+              imgAlt="Fumiya Murakami"
+              name="Fumiya Murakami"
+              role="産業保健師"
+              tagline="組織に健康の火を灯す“実装型”の専門家。働く人の行動変容を支援。"
+              tags={["安全衛生", "リスク管理", "健康経営", "組織支援", "データ利活用"]}
+            />
+
+            <MemberCard
+              imgSrc="/member-soushi.png"
+              imgAlt="Soushi Saito"
+              name="Soushi Saito"
+              role="心理士"
+              tagline="対話を通じて、個人と組織の“もつれ”をほどくカウンセラー。"
+              tags={["カウンセリング", "ラインケア", "組織支援", "データ利活用"]}
+            />
+
+            <MemberCard
+              imgSrc="/member-hirohisa.png"
+              imgAlt="Hirohisa Kato"
+              name="Hirohisa Kato"
+              role="トレーナー"
+              tagline="フィジカル面からパフォーマンスを引き上げるトレーナー。"
+              tags={["運動指導", "コンディショニング", "健康経営", "健康戦略", "データ利活用" ]}
+            />
+          </div>
+        </div>
       </section>
+
 
       {/* ===== Services ===== */}
       <section id="services" className="bg-slate-50 border-t">
@@ -149,25 +196,51 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ===== Contact ===== */}
+      {/* ===== Contact（フォーム修正済み） ===== */}
       <section id="contact" className="border-t bg-slate-50">
         <div className="mx-auto max-w-6xl px-5 py-12">
 
           <h2 className="text-xl sm:text-2xl font-bold">お問い合わせ</h2>
+          <p className="mt-3 text-slate-600">
+            下記フォームよりご連絡ください。
+          </p>
 
-         {/* <p className="mt-3 text-slate-600">
-            オンライン面談で現状整理と進め方をご提案します。下記フォームよりご連絡ください。
-          </p>*/}
+          <form
+            className="mt-6 grid gap-3 sm:max-w-lg bg-white p-4 border rounded-lg"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const form = new FormData(e.currentTarget);
 
-          <div className="mt-6 rounded-xl bg-white border border-slate-200 shadow-md p-1 sm:p-3">
-            <iframe
-              src="https://docs.google.com/forms/d/e/1FAIpQLSeP20Jc8VzrRTXKgMxN14gtnkLj_ZU-J5IT1TuG-eYoP9ub6Q/viewform?embedded=true"
-              width="100%"
-              height="1000"
-              className="rounded-lg"
-            />
-          </div>
+              const GAS_URL =
+                "https://script.google.com/macros/s/AKfycbzNiAYT4VNSIXNUvcOy0J3dVOKAmwhfQHxj27Bsl1NCTfSr4RFNbaAzClTLOFAnH90b/exec";
 
+              await fetch(GAS_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  name: form.get("name"),
+                  company: form.get("company"),
+                  email: form.get("email"),
+                  message: form.get("message"),
+                }),
+              });
+
+              alert("送信しました。内容を受け付けました！");
+              e.currentTarget.reset();
+            }}
+          >
+            <input name="name" className="border rounded-md px-3 py-2" placeholder="お名前" required />
+            <input name="company" className="border rounded-md px-3 py-2" placeholder="会社名（任意）" />
+            <input name="email" className="border rounded-md px-3 py-2" placeholder="メールアドレス" type="email" required />
+            <textarea name="message" className="border rounded-md px-3 py-2 min-h-28" placeholder="ご相談内容" required />
+
+            <button
+              type="submit"
+              className="inline-flex justify-center rounded-md px-5 py-3 bg-emerald-600 text-white font-medium hover:bg-emerald-700"
+            >
+              送信
+            </button>
+          </form>
         </div>
       </section>
 
@@ -175,31 +248,13 @@ export default function Page() {
       <footer className="border-t">
         <div className="mx-auto max-w-6xl px-5 py-10 text-sm text-slate-500">
 
-          
-    {/* 
-    <div className="flex items-center gap-2">
-      <Image
-        src="/header-logo-dark.png"
-        alt=""
-        width={200}
-        height={100}
-        className="h-4 w-auto opacity-70"
-      />
-      <span className="font-medium text-slate-700">Vital Works</span>
-    </div>
-
-    <div className="mt-2">所在地：東京都◯◯区</div>
-    <div className="mt-1">メール：info@vitalworks.jp</div>
-    */}
-
-          <a href="#" className="mt-2 inline-block hover:text-emerald-600">
+          <a href="#" className="inline-block hover:text-emerald-600">
             プライバシーポリシー
           </a>
 
           <div className="mt-6">
             © {new Date().getFullYear()} Vital Works
           </div>
-
         </div>
       </footer>
 
@@ -207,7 +262,54 @@ export default function Page() {
   );
 }
 
-/* ===== Components ===== */
+/* ===== MemberCard ===== */
+function MemberCard({
+  imgSrc,
+  imgAlt,
+  name,
+  role,
+  tagline,
+  tags,
+}: {
+  imgSrc: string;
+  imgAlt: string;
+  name: string;
+  role: string;
+  tagline: string;
+  tags: string[];
+}) {
+  return (
+    <article className="rounded-xl border bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
+      <div className="relative w-full aspect-[4/5] bg-slate-100">
+        <Image
+          src={imgSrc}
+          alt={imgAlt}
+          fill
+          className="object-cover"
+        />
+      </div>
+
+      <div className="p-4 flex flex-col flex-1">
+        <h3 className="text-base sm:text-lg font-semibold">{name}</h3>
+        <p className="mt-1 text-sm text-emerald-700 font-medium">{role}</p>
+        <p className="mt-2 text-sm text-slate-700 leading-relaxed">{tagline}</p>
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <span
+              key={tag}
+              className="inline-flex items-center rounded-full border border-emerald-100 bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-700"
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/* ===== Others ===== */
 
 function ServiceCard({ icon, title, bullets }: { icon: React.ReactNode; title: string; bullets: string[] }) {
   return (
@@ -235,14 +337,12 @@ function Benefit({ title, desc }: { title: string; desc: string }) {
   return (
     <li className="rounded-lg border p-4">
       <div className="font-semibold">{title}</div>
-      <p className="text-slate-600 mt-1 text-sm leading-relaxed">
-        {desc}
-      </p>
+      <p className="text-slate-600 mt-1 text-sm">{desc}</p>
     </li>
   );
 }
 
-/* ===== SVG Icons ===== */
+/* Icons */
 function SVGConsult() {
   return (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
