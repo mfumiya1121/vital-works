@@ -221,7 +221,7 @@ export default function Page() {
     alert("送信中です…少々お待ちください。");
 
     try {
-      const GAS_URL = "https://script.google.com/macros/s/AKfycbzNiAYT4VNSIXNUvcOy0J3dVOKAmwhfQHxj27Bsl1NCTfSr4RFNbaAzClTLOFAnH90b/exec"; // ←あなたのURL
+      const GAS_URL = "https://script.google.com/macros/s/AKfycbw0GaWwiW2TEj8juiyrXY2qzbSTHJL59nJC5zfYK5e_-TwPKsVqyE_ZGW4_d1cHCfT4/exec"; // ←あなたのURL
 
       const res = await fetch(GAS_URL, {
         method: "POST",
