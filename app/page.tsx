@@ -205,7 +205,7 @@ export default function Page() {
 
               try {
                 const GAS_URL =
-                  "https://script.google.com/macros/s/AKfycbxM8uK2FX6oGFCDEbDOX-qu7sRYD_Oa7bMU_BHiQcg0FYHM67WW2CwU8Ngzae4ZWnAG/exec";
+                  "https://script.google.com/macros/s/AKfycbxHWOShLRXdG-RH0_lQvY_Gih5G5k74Z6dSS-rBCk9QeGf6JcraDqvaQF2q3k2ScfHP/exec";
 
                 console.log("===== フォーム送信開始 =====");
                 console.log("name:", name);
