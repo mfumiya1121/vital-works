@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const sheets = google.sheets({ version: "v4", auth });
 
     const spreadsheetId = process.env.SPREADSHEET_ID;
-    const range = "お問い合わせ!A1";
+    const range = "'問い合わせフォーム'!A1";
 
     const values = [
       [
