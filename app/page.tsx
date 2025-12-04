@@ -55,22 +55,54 @@ export default function Page() {
       </header>
 
       {/* ===== Hero ===== */}
-      <section id="top" className="relative h-[140vh] flex items-center">
+      <section
+        id="top"
+        className="
+          relative
+          h-[90vh]
+          sm:h-[100vh]
+          flex items-center
+          overflow-hidden
+        "
+      >
+        {/* PC 用ヒーロー画像（横長） */}
         <Image
-          src="/hero-usv3.png"
-          alt="Hero Background"
+          src="/hero-pc.png"            // ← PC 用画像
+          alt="Hero Background Desktop"
           fill
           priority
-          className="object-cover object-right-top"
+          className="
+            hidden sm:block
+            object-cover
+            object-right-top
+          "
         />
+
+        {/* スマホ用ヒーロー画像（縦長 or 引き） */}
+        <Image
+          src="/hero-sp.png"            // ← スマホ用画像
+          alt="Hero Background Mobile"
+          fill
+          priority
+          className="
+            block sm:hidden
+            object-cover
+            object-center
+          "
+        />
+
+        {/* うっすら暗くするオーバーレイ */}
         <div className="absolute inset-0 bg-black/10" />
 
+        {/* Hero テキスト */}
         <div
           className="
             relative z-10 
             mx-auto max-w-6xl 
-            px-5 mt-[-40px] 
+            px-5 
             text-left
+            pt-16                 /* ヘッダーぶん少し余白 */
+            sm:pt-0
             sm:ml-[calc(50%-460px)]
           "
         >
