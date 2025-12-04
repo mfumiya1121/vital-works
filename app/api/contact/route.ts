@@ -4,10 +4,9 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    // ★ 新仕様のJWTオブジェクト形式
     const auth = new google.auth.JWT({
       email: process.env.GOOGLE_CLIENT_EMAIL,
-      key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+      key: process.env.GOOGLE_PRIVATE_KEY?.split(String.raw`\n`).join("\n"),
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
 
@@ -18,7 +17,7 @@ export async function POST(req: Request) {
 
     const values = [
       [
-        new Date().toISOString(),
+        new Date().toLocaleString("ja-JP"),
         body.name ?? "",
         body.company ?? "",
         body.email ?? "",
@@ -35,8 +34,8 @@ export async function POST(req: Request) {
     });
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 });
-  } catch (err) {
+  } catch (err: any) {
     console.error("Error:", err);
-    return new Response(JSON.stringify({ error: String(err) }), { status: 500 });
+    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
   }
 }

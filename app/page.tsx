@@ -105,7 +105,7 @@ export default function Page() {
               imgAlt="Fumiya Murakami"
               name="Fumiya Murakami"
               role="産業保健師"
-              tagline="組織に健康の火を灯す“実装型”の専門家。働く人の行動変容を支援。"
+              tagline="組織に健康の火を灯す実装型の専門家。働く人の行動変容を支援。"
               tags={["安全衛生", "リスク管理", "健康経営", "組織支援", "データ利活用"]}
             />
 
@@ -114,7 +114,7 @@ export default function Page() {
               imgAlt="Soushi Saito"
               name="Soushi Saito"
               role="心理士"
-              tagline="対話を通じて、個人と組織の“もつれ”をほどくカウンセラー。"
+              tagline="対話を通じて、個人と組織のもつれをほどくカウンセラー。"
               tags={["カウンセリング", "ラインケア", "組織支援", "データ利活用"]}
             />
 
@@ -182,7 +182,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ===== Contact（完全修正版） ===== */}
+      {/* ===== Contact（Next.js API Route 連携版） ===== */}
       <section id="contact" className="border-t bg-slate-50">
         <div className="mx-auto max-w-6xl px-5 py-12">
 
@@ -195,51 +195,31 @@ export default function Page() {
               e.preventDefault();
 
               const form = new FormData(e.currentTarget);
-
-              const name = form.get("name");
-              const company = form.get("company");
-              const email = form.get("email");
-              const message = form.get("message");
+              const data = {
+                name: form.get("name"),
+                company: form.get("company"),
+                email: form.get("email"),
+                message: form.get("message"),
+              };
 
               alert("送信中です…少々お待ちください。");
 
               try {
-                const GAS_URL =
-                  "https://script.google.com/macros/s/AKfycbxHWOShLRXdG-RH0_lQvY_Gih5G5k74Z6dSS-rBCk9QeGf6JcraDqvaQF2q3k2ScfHP/exec";
-
-                console.log("===== フォーム送信開始 =====");
-                console.log("name:", name);
-                console.log("company:", company);
-                console.log("email:", email);
-                console.log("message:", message);
-
-                const res = await fetch(GAS_URL, {
+                const res = await fetch("/api/contact", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                    name,
-                    company,
-                    email,
-                    message,
-                  }),
+                  body: JSON.stringify(data),
                 });
 
-                const text = await res.text();
-                alert(
-                  "*** デバッグ情報 ***\n" +
-                    "HTTPステータス: " +
-                    res.status +
-                    "\n" +
-                    "レスポンス内容: " +
-                    text
-                );
+                if (!res.ok) {
+                  const errText = await res.text();
+                  throw new Error("送信エラー: " + errText);
+                }
 
-                if (!res.ok) throw new Error("送信に失敗しました");
-
-                alert("送信が完了しました！\n担当者よりご連絡いたします。");
+                alert("送信が完了しました！");
                 e.currentTarget.reset();
-              } catch (err) {
-                alert("エラー内容: " + JSON.stringify(err));
+              } catch (err: any) {
+                alert("エラー内容:\n" + err.message);
               }
             }}
           >
@@ -293,7 +273,7 @@ function MemberCard({
         <Image src={imgSrc} alt={imgAlt} fill className="object-cover" />
       </div>
 
-      <div className="p-4 flex flex-row flex-col">
+      <div className="p-4 flex flex-col">
         <h3 className="text-base sm:text-lg font-semibold">{name}</h3>
         <p className="mt-1 text-sm text-emerald-700 font-medium">{role}</p>
         <p className="mt-2 text-sm text-slate-700 leading-relaxed">{tagline}</p>
@@ -313,8 +293,7 @@ function MemberCard({
   );
 }
 
-/* ===== その他コンポーネント ===== */
-
+/* ===== ServiceCard ===== */
 function ServiceCard({
   icon,
   title,
@@ -345,6 +324,7 @@ function ServiceCard({
   );
 }
 
+/* ===== Benefit ===== */
 function Benefit({ title, desc }: { title: string; desc: string }) {
   return (
     <li className="rounded-lg border p-4">
