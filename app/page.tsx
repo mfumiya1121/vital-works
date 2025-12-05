@@ -1,6 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+  useRef,
+  type FormEvent,
+} from "react";
 import Image from "next/image";
 
 export default function Page() {
@@ -9,6 +14,10 @@ export default function Page() {
     "bg-white/10 backdrop-blur-sm text-white"
   );
 
+  // ★ フォーム用の ref
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  // ===== スクロールでヘッダーの背景・ロゴ切り替え =====
   useEffect(() => {
     const onScroll = () => {
       if (window.scrollY > 80) {
@@ -23,6 +32,58 @@ export default function Page() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const form = formRef.current;
+    if (!form) return;
+
+    const handler = (e: Event) => {
+      e.preventDefault();
+      handleSubmit(e as any);
+    };
+
+    form.addEventListener("submit", handler);
+    return () => form.removeEventListener("submit", handler);
+    }, []);
+
+  // ===== お問い合わせフォーム送信処理（ref 版・安全） =====
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formElement = formRef.current;
+    if (!formElement) return;
+
+    const form = new FormData(formElement);
+
+    const data = {
+      name: form.get("name"),
+      company: form.get("company"),
+      email: form.get("email"),
+      message: form.get("message"),
+    };
+
+    alert("送信中です…少々お待ちください。");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error("送信エラー: " + errText);
+      }
+
+      alert("送信が完了しました！");
+
+      // ★★★ ここがポイント：e.currentTarget ではなく ref から reset
+      formElement.reset();
+    } catch (err: any) {
+      alert("エラー内容:\n" + err.message);
+    }
+  };
 
   return (
     <main className="min-h-dvh text-slate-800">
@@ -67,7 +128,7 @@ export default function Page() {
       >
         {/* PC 用ヒーロー画像（横長） */}
         <Image
-          src="/hero-pc.png"            // ← PC 用画像
+          src="/hero-pc.png"
           alt="Hero Background Desktop"
           fill
           priority
@@ -80,7 +141,7 @@ export default function Page() {
 
         {/* スマホ用ヒーロー画像（縦長 or 引き） */}
         <Image
-          src="/hero-sp.png"            // ← スマホ用画像
+          src="/hero-sp.png"
           alt="Hero Background Mobile"
           fill
           priority
@@ -95,31 +156,34 @@ export default function Page() {
         <div className="absolute inset-0 bg-black/10" />
 
         {/* Hero テキスト */}
-        <div
-          className="
-            relative z-10 
-            mx-auto max-w-6xl 
-            px-5 
-            text-left
-            pt-16                 /* ヘッダーぶん少し余白 */
-            sm:pt-0
-            sm:ml-[calc(50%-460px)]
-          "
-        >
-          <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow">
-            健康は、組織の成長エンジン
-          </h1>
-          <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow">
-            人の健康が強くなると、成果は加速する
-          </h1>
-          <h1 className="text-3xl sm:text-5xl font-bold text-white leading-snug drop-shadow mt-3">
-            人の力を、経営の力へ
-          </h1>
+        <div className="relative z-10 max-w-6xl px-5 ml-[8vw] mt-[-40px] text-left">
 
-          <p className="mt-6 text-white/90 text-sm sm:text-base drop-shadow max-w-none">
-            産業保健師・心理士・トレーナーの専門チームが健康戦略の設計から現場実装まで伴走します
-          </p>
-        </div>
+      {/* ===== PC（1行表示） ===== */}
+        <h1 className="hidden sm:block text-5xl font-bold text-white leading-tight drop-shadow max-w-5xl">
+          健康は、組織の成長エンジン<br />
+          人の健康が強くなると、成果は加速する<br />
+          人の力を、経営の力へ
+        </h1>
+
+        <p className="hidden sm:block mt-4 text-white/90 text-lg drop-shadow max-w-4xl">
+          産業保健師・心理士・トレーナーの専門チームが健康戦略の設計から現場実装まで伴走します
+        </p>
+
+      {/* ===== スマホ（行ごとに収めて改行） ===== */}
+        <h1 className="block sm:hidden text-2xl font-bold text-white leading-relaxed drop-shadow">
+          健康は、組織の成長エンジン<br />
+          人の健康が強くなると、<br />
+          成果は加速する<br />
+          人の力を、経営の力へ
+        </h1>
+
+        <p className="block sm:hidden mt-4 text-white/90 text-sm drop-shadow leading-relaxed">
+          産業保健師・心理士・トレーナーの専門チームが<br />
+          健康戦略の設計から現場実装まで伴走します
+        </p>
+
+      </div>
+
       </section>
 
       {/* ===== Team ===== */}
@@ -127,7 +191,7 @@ export default function Page() {
         <div className="mx-auto max-w-6xl px-5 py-12">
           <h2 className="text-xl sm:text-2xl font-bold">Team ─ メンバー紹介</h2>
           <p className="mt-3 text-slate-600 text-sm sm:text-base max-w-2xl">
-            現場で培った経験を持つ3名の専門家が、組織の健康課題に伴走します。
+            現場で培った経験を持つ3名の専門家が、組織の健康課題に伴走します。<br />
             それぞれの得意分野を掛け合わせ、設計から実装まで一気通貫でサポートします。
           </p>
 
@@ -214,7 +278,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ===== Contact（Next.js API Route 連携版） ===== */}
+      {/* ===== Contact ===== */}
       <section id="contact" className="border-t bg-slate-50">
         <div className="mx-auto max-w-6xl px-5 py-12">
 
@@ -222,43 +286,33 @@ export default function Page() {
           <p className="mt-3 text-slate-600">下記フォームよりご連絡ください。</p>
 
           <form
-            className="grid gap-3 sm:max-w-lg"
-            onSubmit={async (e) => {
-              e.preventDefault();
-
-              const form = new FormData(e.currentTarget);
-              const data = {
-                name: form.get("name"),
-                company: form.get("company"),
-                email: form.get("email"),
-                message: form.get("message"),
-              };
-
-              alert("送信中です…少々お待ちください。");
-
-              try {
-                const res = await fetch("/api/contact", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(data),
-                });
-
-                if (!res.ok) {
-                  const errText = await res.text();
-                  throw new Error("送信エラー: " + errText);
-                }
-
-                alert("送信が完了しました！");
-                e.currentTarget.reset();
-              } catch (err: any) {
-                alert("エラー内容:\n" + err.message);
-              }
-            }}
-          >
-            <input name="name" className="border rounded-md px-3 py-2" placeholder="お名前" required />
-            <input name="company" className="border rounded-md px-3 py-2" placeholder="会社名（任意）" />
-            <input name="email" className="border rounded-md px-3 py-2" placeholder="メールアドレス" type="email" required />
-            <textarea name="message" className="border rounded-md px-3 py-2 min-h-28" placeholder="ご相談内容" required />
+            ref={formRef}
+            className="grid gap-3 sm:max-w-lg"> 
+          
+            <input
+              name="name"
+              className="border rounded-md px-3 py-2"
+              placeholder="お名前"
+              required
+            />
+            <input
+              name="company"
+              className="border rounded-md px-3 py-2"
+              placeholder="会社名（任意）"
+            />
+            <input
+              name="email"
+              className="border rounded-md px-3 py-2"
+              placeholder="メールアドレス"
+              type="email"
+              required
+            />
+            <textarea
+              name="message"
+              className="border rounded-md px-3 py-2 min-h-28"
+              placeholder="ご相談内容"
+              required
+            />
 
             <button
               type="submit"

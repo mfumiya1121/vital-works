@@ -15,6 +15,7 @@ export async function POST(req: Request) {
     const spreadsheetId = process.env.SPREADSHEET_ID;
     const range = "'問い合わせフォーム'!A1";
 
+
     const values = [
       [
         new Date().toLocaleString("ja-JP"),
