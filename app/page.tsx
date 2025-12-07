@@ -338,7 +338,7 @@ export default function Page() {
     {/* --- SNSリンク --- */}
     <div className="flex justify-center gap-6 mb-6">
       <a
-        href="https://x.com/"
+        href="https://twitter.com/intent/tweet?text=VITAL%20WORKS%EF%BD%9C%E5%81%A5%E5%BA%B7%E3%81%AF%E3%80%81%E7%B5%84%E7%B9%94%E3%81%AE%E6%88%90%E9%95%B7%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E3%80%82%0A%E7%94%A3%E6%A5%AD%E4%BF%9D%E5%81%A5%E5%B8%AB%C3%97%E5%BF%83%E7%90%86%E5%A3%AB%C3%97%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8A%E3%83%BC%E3%81%AE%E5%B0%82%E9%96%80%E3%83%81%E3%83%BC%E3%83%A0%E3%81%A7%E4%BC%B4%E8%B5%B0%E6%94%AF%E6%8F%B4%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%0Ahttps%3A%2F%2Fvital-works.vercel.app%2F%0A%23%E5%81%A5%E5%BA%B7%E7%B5%8C%E5%96%B6%20%23%E3%82%A6%E3%82%A7%E3%83%AB%E3%83%93%E3%83%BC%E3%82%A4%E3%83%B3%E3%82%B0"
         target="_blank"
         rel="noopener noreferrer"
         className="text-slate-400 hover:text-slate-700 transition-colors"
@@ -346,15 +346,28 @@ export default function Page() {
        <IconBrandX size={48} />
       </a>
       <a
-        href="https://instagram.com/"
+        href="https://line.me/R/msg/text/?VITAL%20WORKS%EF%BD%9C%E5%81%A5%E5%BA%B7%E3%81%AF%E3%80%81%E7%B5%84%E7%B9%94%E3%81%AE%E6%88%90%E9%95%B7%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E3%80%82%0A%E7%94%A3%E6%A5%AD%E4%BF%9D%E5%81%A5%E5%B8%AB%C3%97%E5%BF%83%E7%90%86%E5%A3%AB%C3%97%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8A%E3%83%BC%E3%81%AE%E5%B0%82%E9%96%80%E3%83%81%E3%83%BC%E3%83%A0%E3%81%A7%E4%BC%B4%E8%B5%B0%E6%94%AF%E6%8F%B4%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%0Ahttps%3A%2F%2Fvital-works.vercel.app%2F%0A%23%E5%81%A5%E5%BA%B7%E7%B5%8C%E5%96%B6%20%23%E3%82%A6%E3%82%A7%E3%83%AB%E3%83%93%E3%83%BC%E3%82%A4%E3%83%B3%E3%82%B0"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-slate-400 hover:text-slate-700 transition-colors"
+        className="text-[#97A1B1] hover:text-[#4C5564] transition-colors"
       >
-        <IconBrandInstagram size={48} />
+        <svg
+      width="48"
+      height="48"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+         <path d="M4 12c0-4 3.5-7 8-7s8 3 8 7-3.5 7-8 7c-.9 0-1.8-.1-2.6-.4L6 20l1.1-2.6C5.9 16.1 4 14.3 4 12z" />
+    <line x1="9" y1="11" x2="15" y2="11" />
+    <line x1="9" y1="14" x2="13" y2="14" />
+    </svg>
       </a>
       <a
-        href="https://linkedin.com/"
+        href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fvital-works.vercel.app%2F"
         target="_blank"
         rel="noopener noreferrer"
         className="text-slate-400 hover:text-slate-700 transition-colors"
