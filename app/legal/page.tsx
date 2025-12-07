@@ -13,7 +13,7 @@ export default function LegalPage() {
         <p className="mb-1">
         連絡先：
           <a
-            href="#contact" // ★ フォームへのリンクに変更
+            href="https://vital-works.vercel.app/#contact" // ★ フォームへのリンクに変更
             className="underline underline-offset-2"
             > 
             お問い合わせフォーム
@@ -161,7 +161,7 @@ export default function LegalPage() {
         <p className="mb-6">
           【受付窓口】<br />
         <a
-            href="#contact" // ★ フォームへのリンクに変更
+            href="https://vital-works.vercel.app/#contact" // ★ フォームへのリンクに変更
             className="underline underline-offset-2"
             > 
             お問い合わせフォーム
@@ -227,9 +227,9 @@ export default function LegalPage() {
         <p className="mb-6">
           VITAL WORKS
           <br />
-        　連絡先：
+          連絡先：
          <a
-            href="#contact" // ★ フォームへのリンクに変更
+            href="https://vital-works.vercel.app/#contact" // ★ フォームへのリンクに変更
             className="underline underline-offset-2"
             > 
             お問い合わせフォーム
