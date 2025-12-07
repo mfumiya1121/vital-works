@@ -3,34 +3,33 @@ export default function LegalPage() {
     <main className="min-h-dvh bg-white text-slate-800">
       <section className="mx-auto max-w-3xl px-4 py-16 text-sm leading-relaxed">
         <h1 className="text-2xl font-bold mb-8">プライバシーポリシー</h1>
-
         <p className="mb-6">
           Vital Works（以下「当チーム」といいます。）は、提供するサービスにおける個人情報の取り扱いについて、以下のとおりプライバシーポリシー（以下「本ポリシー」といいます。）を定めます。
         </p>
-
         {/* 1. 事業者情報 */}
         <h2 className="mt-10 mb-3 text-lg font-semibold">1. 事業者情報</h2>
         <p className="mb-1">名称：Vital Works</p>
         <p className="mb-1">形態：産業保健師・心理士・トレーナーによる専門チーム</p>
         <p className="mb-1">
-          連絡先：
+        連絡先：
           <a
-            href="mailto:info@vitalworks.jp"
+            href="#contact" // ★ フォームへのリンクに変更
             className="underline underline-offset-2"
-          >
-            info@vitalworks.jp
-          </a>
+            > 
+            お問い合わせフォーム
+            </a>
         </p>
+       {/*
         <p className="mt-3 mb-6 text-xs text-slate-500">
           ※正式な法人化を行った場合には、名称や所在地を適宜更新します。
         </p>
+        */}
 
         {/* 2. 取得する情報 */}
         <h2 className="mt-10 mb-3 text-lg font-semibold">2. 取得する情報</h2>
         <p className="mb-3">
           当チームは、以下の情報を取得することがあります。
         </p>
-
         <h3 className="mt-4 mb-2 font-semibold">
           （1）お問い合わせフォーム等でご提供いただく情報
         </h3>
@@ -50,10 +49,11 @@ export default function LegalPage() {
           <li>リファラ（アクセス元ページ）</li>
           <li>クッキー（Cookie）等を用いて取得されるアクセス情報</li>
         </ul>
-
+        {/*
         <p className="mt-2 mb-6 text-xs text-slate-500">
           ※今後、アクセス解析ツールや外部サービスを導入した場合には、その旨および取得項目を本ポリシーに追記します。
         </p>
+        */}
 
         {/* 3. 個人情報の利用目的 */}
         <h2 className="mt-10 mb-3 text-lg font-semibold">
@@ -72,7 +72,6 @@ export default function LegalPage() {
         <p className="mb-6">
           上記の目的の範囲外で利用する必要が生じた場合は、法令により認められる場合を除き、あらかじめ本人の同意を得た上で行います。
         </p>
-
         {/* 4. 利用目的の変更 */}
         <h2 className="mt-10 mb-3 text-lg font-semibold">
           4. 利用目的の変更
@@ -104,12 +103,12 @@ export default function LegalPage() {
           </li>
           <li>合併その他の事由による事業の承継に伴って個人情報が提供される場合</li>
         </ol>
-
         {/* 6. 業務委託について */}
         <h2 className="mt-10 mb-3 text-lg font-semibold">
           6. 業務委託について
         </h2>
         <p className="mb-6">
+
           当チームは、サービス提供や問い合わせ対応等に必要な範囲で、サーバー事業者、メールサービス、フォームサービス等の外部事業者に個人情報の取り扱いを委託することがあります。この場合、委託先に対して必要かつ適切な監督を行います。
         </p>
 
@@ -126,9 +125,11 @@ export default function LegalPage() {
           <li>共同利用の目的：第3条に定める利用目的の範囲内</li>
           <li>共同利用の管理責任者：Vital Works 代表（または共同代表者）</li>
         </ul>
+        {/*
         <p className="mt-2 mb-6 text-xs text-slate-500">
           ※共同代表体制が正式に決まった段階で、氏名を明記する形に更新してください。
         </p>
+        */}
 
         {/* 8. 安全管理措置 */}
         <h2 className="mt-10 mb-3 text-lg font-semibold">
@@ -159,13 +160,12 @@ export default function LegalPage() {
         </p>
         <p className="mb-6">
           【受付窓口】<br />
-          E-mail：
-          <a
-            href="mailto:info@vitalworks.jp"
+        <a
+            href="#contact" // ★ フォームへのリンクに変更
             className="underline underline-offset-2"
-          >
-            info@vitalworks.jp
-          </a>
+            > 
+            お問い合わせフォーム
+            </a>
         </p>
 
         {/* 10. Cookie */}
@@ -185,9 +185,11 @@ export default function LegalPage() {
         <p className="mb-6">
           ブラウザの設定によりCookieの受け入れを拒否することも可能ですが、その場合サイトの一部機能がご利用いただけないことがあります。
         </p>
+        {/*
         <p className="mt-2 mb-6 text-xs text-slate-500">
           ※Google アナリティクス等を導入した場合は、そのサービス名・提供者・オプトアウト方法を追記することをおすすめします。
         </p>
+        */}
 
         {/* 11. 免責事項 */}
         <h2 className="mt-10 mb-3 text-lg font-semibold">11. 免責事項</h2>
@@ -215,24 +217,24 @@ export default function LegalPage() {
         </p>
 
         {/* 13. お問い合わせ窓口 */}
+
         <h2 className="mt-10 mb-3 text-lg font-semibold">
           13. お問い合わせ窓口
-        </h2>
+        </h2> 
         <p className="mb-4">
           本ポリシーおよび個人情報の取り扱いに関するお問い合わせは、下記までご連絡ください。
         </p>
         <p className="mb-6">
-          Vital Works
+          VITAL WORKS
           <br />
-          E-mail：
-          <a
-            href="mailto:info@vitalworks.jp"
+        　連絡先：
+         <a
+            href="#contact" // ★ フォームへのリンクに変更
             className="underline underline-offset-2"
-          >
-            info@vitalworks.jp
+            > 
+            お問い合わせフォーム
           </a>
         </p>
-
         <p className="mt-8 text-xs text-slate-500">
           制定日：2025年12月6日
           <br />

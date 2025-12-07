@@ -8,6 +8,13 @@ import {
 } from "react";
 import Image from "next/image";
 
+import {
+  IconBrandX,
+  IconBrandInstagram,
+  IconBrandLinkedin,
+} from "@tabler/icons-react";
+
+
 export default function Page() {
   const [logoSrc, setLogoSrc] = useState("/header-logo.png");
   const [headerClass, setHeaderClass] = useState(
@@ -324,15 +331,55 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ===== Footer ===== */}
-      <footer className="border-t">
-        <div className="mx-auto max-w-6xl px-5 py-10 text-sm text-slate-500">
-          <a href="#" className="inline-block hover:text-emerald-600">
-            プライバシーポリシー
-          </a>
-          <div className="mt-6">© {new Date().getFullYear()} Vital Works</div>
-        </div>
-      </footer>
+{/* ===== Footer ===== */}
+<footer className="border-t border-slate-200 mt-24">
+  <div className="mx-auto max-w-5xl px-6 py-12 text-center">
+
+    {/* --- SNSリンク --- */}
+    <div className="flex justify-center gap-6 mb-6">
+      <a
+        href="https://x.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-slate-400 hover:text-slate-700 transition-colors"
+      >
+       <IconBrandX size={48} />
+      </a>
+      <a
+        href="https://instagram.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-slate-400 hover:text-slate-700 transition-colors"
+      >
+        <IconBrandInstagram size={48} />
+      </a>
+      <a
+        href="https://linkedin.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-slate-400 hover:text-slate-700 transition-colors"
+      >
+        <IconBrandLinkedin size={48} />
+      </a>
+    </div>
+
+    {/* --- ナビゲーション --- */}
+    <nav className="flex justify-center gap-10 mb-4 text-sm">
+      <a
+        href="/legal"
+        className="text-slate-500 hover:text-slate-700 transition-colors"
+      >
+        プライバシーポリシー
+      </a>
+    </nav>
+
+    {/* --- コピーライト --- */}
+    <p className="text-xs text-slate-400 tracking-wide mt-4">
+      © {new Date().getFullYear()} VITAL WORKS
+    </p>
+  </div>
+</footer>
+
     </main>
   );
 }
