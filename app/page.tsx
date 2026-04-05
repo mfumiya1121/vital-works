@@ -81,8 +81,7 @@ export default async function Page() {
           </h1>
 
           <p className="block sm:hidden mt-4 text-white/90 text-sm drop-shadow leading-relaxed">
-            産業医・産業保健師・心理士・トレーナーの専門チームが<br />
-            健康戦略の設計から現場実装まで伴走します
+            専門チームが健康戦略の設計から現場実装まで伴走します
           </p>
         </div>
       </section>
