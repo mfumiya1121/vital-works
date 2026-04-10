@@ -13,7 +13,7 @@ export async function POST(req: Request) {
       to: [process.env.CONTACT_RECEIVER_EMAIL || 'vitalworks2025@gmail.com'],
       subject: `【お問い合わせ】${name}様より`,
       text: `
-ウェブサイトから新しいお問い合わせを受け付けました。
+ウェブサイトから新しいお問い合わせを受け付けました。S
 
 【お名前】
 ${name}
