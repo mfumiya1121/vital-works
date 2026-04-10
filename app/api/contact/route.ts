@@ -1,8 +1,15 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: Request) {
+  const apiKey = process.env.RESEND_API_KEY;
+  
+  if (!apiKey) {
+    return new Response(JSON.stringify({ error: "Vercelの環境変数(RESEND_API_KEY)が設定されていません。" }), { status: 500 });
+  }
+
+  // リクエスト時にのみResendを初期化する
+  const resend = new Resend(apiKey);
+
   try {
     const body = await req.json();
     const { name, company, email, message } = body;
@@ -13,7 +20,7 @@ export async function POST(req: Request) {
       to: [process.env.CONTACT_RECEIVER_EMAIL || 'vitalworks2025@gmail.com'],
       subject: `【お問い合わせ】${name}様より`,
       text: `
-ウェブサイトから新しいお問い合わせを受け付けました。S
+ウェブサイトから新しいお問い合わせを受け付けました。
 
 【お名前】
 ${name}
